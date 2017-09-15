@@ -15,7 +15,7 @@ void generateTestFile()
     int nUsers = 0, userId, nRatings, n, score, trackId;
 
     if (userRatingsFile.is_open()) {
-        while(nUsers < 80) {
+        while(nUsers < 100) {
             getline(userRatingsFile, userRatingLine);
             sscanf(userRatingLine.c_str(), "%d|%d", &userId, &nRatings);
             userRatingsSmallFile << userRatingLine << endl;
