@@ -36,17 +36,19 @@ int getLoveRatingValue(int score) {
 
 void squareCounting(ifstream &file, track2userScore tracks)
 {
-    int confSquares[10] = {0,0,0,0,0,0,0,0,0,0};
+    int confSquares[9] = {0,0,0,0,0,0,0,0,0};
     string line;
     queue<int> q;
     char squareConfInBinary[3];
     ofstream instanceMatrix("./data/instance-test.txt", ios::out);
+    int totalUsers = 80, nUsers = 0;
 
     int userTarget, nRatings, i, j, k, itemTarget, score, item,a,b,c, confValue;
 
     while(getline(file, line))
     {
         sscanf(line.c_str(), "%d|%d", &userTarget, &nRatings);
+        nUsers ++;
         int items[nRatings], scores[nRatings];
         for (i = 0; i < nRatings; i++) {
             getline(file, line);
@@ -54,12 +56,12 @@ void squareCounting(ifstream &file, track2userScore tracks)
             items[i] = item;
             scores[i] = score;
         }
-        confSquares[0] = userTarget;
+        printf("n:users = %d -> %.2f%% \n", nUsers, (double) (nUsers*100)/totalUsers);
 
         //this for is for generate every row of the instance matrix
         for (i = 0; i < nRatings; i++) {
             itemTarget = items[i];
-            confSquares[9] = getLoveRatingValue(scores[i]);
+            confSquares[8] = getLoveRatingValue(scores[i]);
             //count squares
             for (j = 0; j < nRatings; j++) {
                 if (itemTarget != items[j]) {
@@ -71,7 +73,7 @@ void squareCounting(ifstream &file, track2userScore tracks)
                                 c = getLoveRatingValue(tracks[itemTarget][userScore.first]);
                                 sprintf(squareConfInBinary, "%d%d%d", a,b,c);
                                 confValue = stoi(squareConfInBinary, nullptr, 2);
-                                confSquares[confValue + 1] ++;
+                                confSquares[confValue] ++;
                             }
                         }
                     }
@@ -79,7 +81,7 @@ void squareCounting(ifstream &file, track2userScore tracks)
             }
 
             //print lLnes in file
-            for(k= 0; k < 10; k++) {
+            for(k= 0; k < 9; k++) {
                 instanceMatrix << confSquares[k] << " ";
             }
             instanceMatrix << endl;
@@ -95,6 +97,7 @@ int main ()
     ifstream testFile("./data/small-test/test.txt", ios::in);
     // ifstream testFile("./data/yahoo-track2/testIdx2.txt", ios::in);
     track2userScore tracksMap = getHashmap(testFile);
+    cout << "Finish read File" << endl;
     testFile.clear();
     testFile.seekg(0, ios::beg);
     squareCounting(testFile, tracksMap);

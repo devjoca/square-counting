@@ -7,7 +7,7 @@ using namespace std;
 
 void generateTestFile()
 {
-    ifstream userRatingsFile("./data/yahoo-track2/testIdx2.txt", ios::in);
+    ifstream userRatingsFile("./data/yahoo-track2/trainIdx2.txt", ios::in);
     ofstream userRatingsSmallFile("./data/small-test/test.txt", ios::out);
     set<int> trackIds;
     std::set<int>::iterator it;
@@ -15,7 +15,7 @@ void generateTestFile()
     int nUsers = 0, userId, nRatings, n, score, trackId;
 
     if (userRatingsFile.is_open()) {
-        while(nUsers < 10000) {
+        while(nUsers < 80) {
             getline(userRatingsFile, userRatingLine);
             sscanf(userRatingLine.c_str(), "%d|%d", &userId, &nRatings);
             userRatingsSmallFile << userRatingLine << endl;
