@@ -55,7 +55,7 @@ void squareCounting(ifstream &file, track2userScore tracks)
             scores[i] = score;
         }
         confSquares[0] = userTarget;
-        // cout << nRatings << endl;
+
         //this for is for generate every row of the instance matrix
         for (i = 0; i < nRatings; i++) {
             itemTarget = items[i];
