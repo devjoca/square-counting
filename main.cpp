@@ -42,7 +42,7 @@ void squareCounting(ifstream &file, track2userScore tracks)
     char squareConfInBinary[3];
     ofstream instanceMatrix("./data/instance-test.txt", ios::out);
 
-    int userTarget, nRatings, i, itemTarget, score, j, item,a,b,c, confValue;
+    int userTarget, nRatings, i, j, k, itemTarget, score, item,a,b,c, confValue;
 
     while(getline(file, line))
     {
@@ -61,14 +61,14 @@ void squareCounting(ifstream &file, track2userScore tracks)
             itemTarget = items[i];
             confSquares[9] = getLoveRatingValue(scores[i]);
             //count squares
-            for (i = 0; i < nRatings; i++) {
-                if (itemTarget != items[i]) {
-                    a = (char) getLoveRatingValue(tracks[items[i]][userTarget]);
-                    for (auto userScore: tracks[items[i]]) {
+            for (j = 0; j < nRatings; j++) {
+                if (itemTarget != items[j]) {
+                    a = getLoveRatingValue(tracks[items[j]][userTarget]);
+                    for (auto userScore: tracks[items[j]]) {
                         if ( userScore.first != userTarget) {
-                            b = (char) getLoveRatingValue(userScore.second);
+                            b = getLoveRatingValue(userScore.second);
                             if(tracks[itemTarget].count(userScore.first)) {
-                                c = (char) getLoveRatingValue(tracks[itemTarget][userScore.first]);
+                                c = getLoveRatingValue(tracks[itemTarget][userScore.first]);
                                 sprintf(squareConfInBinary, "%d%d%d", a,b,c);
                                 confValue = stoi(squareConfInBinary, nullptr, 2);
                                 confSquares[confValue + 1] ++;
@@ -79,8 +79,8 @@ void squareCounting(ifstream &file, track2userScore tracks)
             }
 
             //print lLnes in file
-            for(j= 0; j < 10; j++) {
-                instanceMatrix << confSquares[j] << " ";
+            for(k= 0; k < 10; k++) {
+                instanceMatrix << confSquares[k] << " ";
             }
             instanceMatrix << endl;
         }
