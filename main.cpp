@@ -40,7 +40,7 @@ void squareCounting(ifstream &file, track2userScore tracks)
     string line;
     queue<int> q;
     char squareConfInBinary[3];
-    ofstream instanceMatrix("./data/instance-test.txt", ios::out);
+    ofstream instanceMatrix("./data/instance-train.txt", ios::out);
     int totalUsers = 80, nUsers = 0;
 
     int userTarget, nRatings, i, j, k, itemTarget, score, item,a,b,c, confValue;
