@@ -1,6 +1,6 @@
-./data/yahoo-track1
-./data/yahoo-track2
-./data/instance-test.txt
+data/yahoo-track1/*
+data/yahoo-track2/*
+data/instance-test.txt
 
 # Prerequisites
 *.d
